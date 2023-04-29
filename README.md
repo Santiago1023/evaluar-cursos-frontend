@@ -17,3 +17,14 @@ $ docker compose up
 > `$ docker compose build --no-cache`<br/>
 > `$ docker compose up --force-recreate`<br/>
 > Para reconstruir la imagen y el contenedor de cero.
+
+Una vez inicializado el contenedor, pueden ver la aplicación en `http://localhost:8080`.
+
+### Lista de rutas
+- `/login`
+- `/form`
+- `/select-course`
+- `/consult`
+- `/results`
+- `/inform`
+> Recuerden que la mayoría de estas rutas están en desarrollo, pero pueden explorar.
