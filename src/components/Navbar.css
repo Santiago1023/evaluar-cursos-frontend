@@ -41,7 +41,7 @@ div.user_info {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  align-items: start;
+  align-items: flex-start;
   position: fixed;
   top: 85px;
   right: 5%;

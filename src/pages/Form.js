@@ -2,14 +2,12 @@ import { useState } from "react";
 import { Content } from "../components/Content";
 import { AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeftLong,
-  faPaperPlane,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeftLong, faForward } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router";
 import { useMutation } from "react-query";
 import { COURSE_SELECT_ROUTE } from "../middleware/constants";
 import { sendForm } from "../middleware/fetchers";
+import { StepProgressBar } from "../components/StepProgressBar";
 
 const QUESTIONS = {
   q1: {
@@ -66,40 +64,48 @@ const QUESTIONS = {
   },
 };
 
-const FeedbackPage = ({ onEvaluation, onSend }) => {
+const FormPage = ({ aspect, question, children, onReturn, onNext }) => {
+  return (
+    <div className="form" style={{ position: "relative", top: "20px" }}>
+      <p className="form_aspect">{aspect}</p>
+      <p className="form_question">{question}</p>
+      {children}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button className="form" onClick={onReturn}>
+          <FontAwesomeIcon
+            icon={faArrowLeftLong}
+            style={{ marginRight: "12px" }}
+          />
+          Volver
+        </button>
+        <button className="form" onClick={onNext}>
+          Siguiente
+          <FontAwesomeIcon icon={faForward} style={{ marginLeft: "12px" }} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const FeedbackQuestion = ({ onEvaluation }) => {
   const [feedbackText, setFeedbackText] = useState("");
 
   return (
     <Content>
-      <div className="form">
-        <p className="form_aspect">Retroalimentación</p>
-        <p className="form_question">
-          ¿Por último, que comentarios y/o retroalimentación tienes con respecto
-          a este curso o profesor?
-        </p>
+      <FormPage
+        aspect="Retroalimentación"
+        question="¿Por último, que comentarios y/o retroalimentación tienes con respecto
+          a este curso o profesor?"
+        onReturn={() => onEvaluation("feedback", -1)}
+        onNext={() => onEvaluation("feedback", feedbackText)}
+      >
         <textarea
           value={feedbackText}
           rows={5}
           onChange={(e) => setFeedbackText(e.target.value)}
           placeholder="Escribe una retroalimentación"
         />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <button className="form" onClick={() => onEvaluation("feedback", 0)}>
-            <FontAwesomeIcon
-              icon={faArrowLeftLong}
-              style={{ marginRight: "12px" }}
-            />
-            Anterior
-          </button>
-          <button className="form" onClick={onSend}>
-            Enviar
-            <FontAwesomeIcon
-              icon={faPaperPlane}
-              style={{ marginLeft: "12px" }}
-            />
-          </button>
-        </div>
-      </div>
+      </FormPage>
     </Content>
   );
 };
@@ -107,9 +113,12 @@ const FeedbackPage = ({ onEvaluation, onSend }) => {
 const Question = ({ id, aspect, question, onEvaluation }) => {
   return (
     <Content>
-      <div className="form">
-        <p className="form_aspect">{aspect}</p>
-        <p className="form_question">{question}</p>
+      <FormPage
+        aspect={aspect}
+        question={question}
+        onReturn={() => onEvaluation(id, -1)}
+        onNext={() => onEvaluation(id, 0)}
+      >
         <div className="form_buttons">
           <button className="form" onClick={() => onEvaluation(id, 1)}>
             Muy malo
@@ -127,36 +136,29 @@ const Question = ({ id, aspect, question, onEvaluation }) => {
             Excelente
           </button>
         </div>
-
-        <div
-          style={{
-            marginTop: "40px",
-          }}
-        >
-          <button className="form" onClick={() => onEvaluation(id, 0)}>
-            <FontAwesomeIcon
-              icon={faArrowLeftLong}
-              style={{ marginRight: "12px" }}
-            />
-            Anterior
-          </button>
-        </div>
-      </div>
+      </FormPage>
     </Content>
   );
 };
 
 export const Form = () => {
-  function handleEvaluation(questionID, grade) {
-    if (grade > 0) {
+  function handleEvaluation(questionID, value) {
+    // -1: back, 0: skip
+
+    let dir = 1;
+
+    if (value === -1) {
+      dir = -1;
+    }
+
+    if (value !== 0 && value !== -1) {
       setData({
         ...data,
-        [questionID]: grade,
+        [questionID]: value,
       });
     }
 
-    const next_id_idx =
-      Object.keys(QUESTIONS).indexOf(questionID) + (grade > 0 ? 1 : -1);
+    const next_id_idx = Object.keys(QUESTIONS).indexOf(questionID) + dir;
     if (next_id_idx >= 0) {
       const next_id = Object.keys(QUESTIONS)[next_id_idx];
       setCQ(next_id);
@@ -197,18 +199,31 @@ export const Form = () => {
   });
 
   return (
-    <AnimatePresence mode="wait">
-      {CQ === "feedback" ? (
-        <FeedbackPage onEvaluation={handleEvaluation} onSend={handleSendForm} />
-      ) : (
-        <Question
-          id={CQ}
-          key={CQ}
-          aspect={QUESTIONS[CQ].aspect}
-          question={QUESTIONS[CQ].question}
-          onEvaluation={handleEvaluation}
-        />
-      )}
-    </AnimatePresence>
+    <>
+      <Content>
+        <div className="form">
+          <StepProgressBar
+            currentStep={Object.keys(QUESTIONS).indexOf(CQ)}
+            steps={Object.keys(QUESTIONS).length}
+          />
+        </div>
+      </Content>
+      <AnimatePresence mode="wait">
+        {CQ === "feedback" ? (
+          <FeedbackQuestion
+            onEvaluation={handleEvaluation}
+            onSend={handleSendForm}
+          />
+        ) : (
+          <Question
+            id={CQ}
+            key={CQ}
+            aspect={QUESTIONS[CQ].aspect}
+            question={QUESTIONS[CQ].question}
+            onEvaluation={handleEvaluation}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };

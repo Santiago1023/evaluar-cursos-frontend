@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { SLIDE } from "./animations/framer-animations";
 
-export const Content = ({ children }) => {
+export const Content = ({ children, style }) => {
   return (
     <motion.div
       className="content"
@@ -10,6 +10,7 @@ export const Content = ({ children }) => {
       initial="initial"
       animate="animate"
       exit="exit"
+      style={style}
     >
       {children}
     </motion.div>

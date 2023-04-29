@@ -1,0 +1,40 @@
+svg.step_progress_bar_dot,
+div.background_line {
+  transition: all 400ms ease 0s;
+}
+
+div.step_progress_bar {
+  position: relative;
+  width: 100%;
+  top: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  height: 24px;
+}
+
+div.background_line_placeholder {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.377);
+  z-index: -1;
+}
+
+div.background_line {
+  position: absolute;
+  height: 2px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+svg.step_progress_bar_dot {
+  color: white;
+  font-size: 12px;
+}
+
+svg.step_progress_bar_dot.active {
+  font-size: 24px;
+}
