@@ -1,0 +1,35 @@
+name: React Pipeline
+
+on:
+  push:
+    branches:
+      - pruebas-calidad
+  pull_request:
+    branches:
+      - pruebas-calidad
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install
+      - name: Build application
+        run: yarn build
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: build/
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn install
+      - name: Run tests
+        run: yarn test
