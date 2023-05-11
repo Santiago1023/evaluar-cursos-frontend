@@ -107,118 +107,118 @@ Obtiene el informe de evaluaciones para un curso. En la respuesta se debe inclui
 **Response Scheme**
 ```json
 {
-    "headers": {
-      "professor": "Wilmer Alberto Gil",
-      "subject": "Analisis y diseño de sistemas 1",
-      "semester": "2023-1"
-    },
-    "section1": {
-      "q1": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 9
-      }
-    },
-    "section2": {
-      "q2": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 17
-      }
-    },
-    "section3": {
-      "q3": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 17
-      }
-    },
-    "section4": {
-      "q4": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "q5": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 18
-      }
-    },
-    "section5": {
-      "q6": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "q7": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 17
-      }
-    },
-    "section6": {
-      "q8": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "q9": {
-        "average": 4,
-        "desv_est": 5,
-        "coef_var": 9,
-        "answers": 9
-      },
-      "q10": {
-        "average": 20,
-        "desv_est": 10,
-        "coef_var": 12,
-        "answers": 15
-      },
-      "total": {
-        "t_average": 7,
-        "t_desv_est": 7,
-        "t_coef_var": 27,
-        "t_answers": 17
-      }
-    }
-  }
+        "headers": {
+                "professor": "Wilmer Alberto Gil",
+                "subject": "Analisis y diseño de sistemas 1",
+                "semester": "2023-1"
+        },
+        "section1": {
+                "q1": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 9
+                }
+        },
+        "section2": {
+                "q2": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 17
+                }
+        },
+        "section3": {
+                "q3": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 17
+                }
+        },
+        "section4": {
+                "q4": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "q5": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 18
+                }
+        },
+        "section5": {
+                "q6": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "q7": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 17
+                }
+        },
+        "section6": {
+                "q8": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "q9": {
+                        "average": 4,
+                        "desv_est": 5,
+                        "coef_var": 9,
+                        "answers": 9
+                },
+                "q10": {
+                        "average": 20,
+                        "desv_est": 10,
+                        "coef_var": 12,
+                        "answers": 15
+                },
+                "total": {
+                        "t_average": 7,
+                        "t_desv_est": 7,
+                        "t_coef_var": 27,
+                        "t_answers": 17
+                }
+        }
+}
 ```
